@@ -45,6 +45,7 @@ export const AppointmentForm = ({
     defaultValues: {
       primaryPhysician: appointment ? appointment?.primaryPhysician : "",
       schedule: appointment
+        // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
         ? new Date(appointment?.schedule!)
         : new Date(Date.now()),
       reason: appointment ? appointment.reason : "",
@@ -72,7 +73,7 @@ export const AppointmentForm = ({
 
     try {
       if (type === "create" && patientId) {
-        const appointment = {
+        const appointmentData = {
           userId,
           patient: patientId,
           primaryPhysician: values.primaryPhysician,
@@ -82,7 +83,7 @@ export const AppointmentForm = ({
           note: values.note,
         };
 
-        const newAppointment = await createAppointment(appointment);
+        const newAppointment = await createAppointment(appointmentData);
 
         if (newAppointment) {
           form.reset();
@@ -93,6 +94,7 @@ export const AppointmentForm = ({
       } else {
         const appointmentToUpdate = {
           userId,
+          // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
           appointmentId: appointment?.$id!,
           appointment: {
             primaryPhysician: values.primaryPhysician,
@@ -106,6 +108,7 @@ export const AppointmentForm = ({
         const updatedAppointment = await updateAppointment(appointmentToUpdate);
 
         if (updatedAppointment) {
+          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
           setOpen && setOpen(false);
           form.reset();
         }

@@ -36,6 +36,7 @@ const RequestSuccess = async ({
             height={300}
             width={280}
             alt="success"
+            unoptimized
           />
           <h2 className="header mb-6 max-w-[600px] text-center">
             Your <span className="text-green-500">appointment request</span> has
@@ -48,6 +49,7 @@ const RequestSuccess = async ({
           <p>Requested appointment details: </p>
           <div className="flex items-center gap-3">
             <Image
+              // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
               src={doctor?.image!}
               alt="doctor"
               width={100}
